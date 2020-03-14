@@ -1,6 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
+#if MENU_CONFIG
+
 #include "main.h"
 
 /*
@@ -69,5 +71,5 @@ private:
 extern menu myMenu;
 
 
-
+#endif  //MENU_CONFIG
 #endif  //MENU_H

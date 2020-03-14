@@ -7,42 +7,6 @@
     Tact switch buttons actions (create a function for each) **in tact config cpp file
 ####################################################################################################*/
 
-void empty();
-
-// Up button
-//void up_s();
-
-void up_r();
-
-void up_h();
-
-// Select button
-//void sel_s();
-
-void sel_r();
-
-void sel_h();
-
-// Down button
-//void down_s();
-
-void down_r();
-
-void down_h();
-
-// Left button
-//void left_s();
-
-void left_r();
-
-void left_h();
-
-//
-// Right button
-
-void ri_r();
-
-void ri_h();
 
 /*####################################################################################################
     Pages to print (create a function for each) **in menu config cpp file
@@ -50,16 +14,16 @@ void ri_h();
 
 #define INIT_SETUP_POS 0
 #define INIT_START_POS 2
-void print_init_page();
+//void print_init_page();
 
 #define SETUP_TEST_TYPE_POS 0
 #define SETUP_EXACT_DISTANCE 1
 #define SETUP_BT_PAIR_POS 2
-void print_setup_page();
+//void print_setup_page();
 
-void print_wait_for_rfid_page();
+//void print_wait_for_rfid_page();
 
-void print_rfid_detected_page();
+//void print_rfid_detected_page();
 
 /*####################################################################################################
     State Machine (FSM) events (list all possible events here, STARTING WITH = 1)

@@ -17,10 +17,6 @@ void testBT()
   }
 }
 
-#define ENTER_MEASURING_MODE_MESSAGE
-#define RFID_RECOGNIZED_MESSAGE 1
-#define START_TIME_MEASURED_MESSAGE 97 // a
-#define TEST_RESULT_MILLISEC_MESSAGE 2
 
 void read_BT_events()
 {
@@ -30,6 +26,10 @@ void read_BT_events()
     //BTserial.write(y);
     switch (receivedByte)
     {
+      case ENTER_MEASURING_MODE_MESSAGE:
+      Serial.println ("ye");
+      break;
+
     case START_TIME_MEASURED_MESSAGE:
       //record time NOW
       break;
@@ -48,7 +48,9 @@ void read_BT_events()
   }
 }
 
-void send_byte_BT(uint8_t message)
+
+
+void send_byte_BT(unsigned char message)
 {
   BTserial.write(message);
 }

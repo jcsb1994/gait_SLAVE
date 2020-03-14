@@ -10,10 +10,12 @@
 // Debounce macros
 #define DEBOUNCED 1
 #define NOT_DEBOUNCED 0
+#define MAXIMUM (DEBOUNCE_TIME * SAMPLE_FREQUENCY)                            //debounce algorith max samples
 // Polling macros
 #define SHORT_EFFECT_REQUIRED 1
 #define RELEASE_EFFECT_REQUIRED 2
 #define LONG_EFFECT_REQUIRED 3
+#define ITERATIONS_TO_LONG_PRESS_TRIGGER LONG_PRESS_DELAY / TACT_TIMER_PERIOD //calculates how many ISR fires needed for long press
 
 /*##################################################
             DECLARATION

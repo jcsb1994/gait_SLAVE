@@ -1,5 +1,5 @@
 #include "74HC165.h"
-
+/*
 void input_shift_reg_SPI_setup()
 {
     pinMode(LOAD_CONNECTION, OUTPUT);
@@ -21,3 +21,4 @@ int transfer_shift_reg_data()
     int data = SPI.transfer(0x00);
     return data;
 }
+*/

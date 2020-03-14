@@ -28,6 +28,8 @@
 /***************************************************************************
  * BUTTONS (TACT SWITCHES) MACROS
  ***************************************************************************/
+#define BUTTONS_CONFIG 0
+#if BUTTONS_CONFIG
 
 #define BUTTON_ACTIVE_STATE_CONFIG 1 // 1 for active HIGH buttons or 0 for active low
 
@@ -51,6 +53,14 @@
 #define DEBOUNCE_TIME 0.3
 #define SAMPLE_FREQUENCY 6
 
+
+#endif //BUTTONS_CONFIG
+
+
+/***************************************************************************
+ * Menu (class used to print pages as a user interface)
+ ***************************************************************************/
+#define MENU_CONFIG 0
 
 
 /***************************************************************************
@@ -112,7 +122,7 @@ ADDONS : ADD HEADERS IF USING THOSE PARTS
  * 4x20 LCD
  ***************************************************************************/
 
-#define FOUR_LCD_CONFIG 1
+#define FOUR_LCD_CONFIG 0
 #define LCD_I2C_ADDR 0x27 //0x3F
 
 /*##################################################################
@@ -125,8 +135,7 @@ CONSTANT MACROS (DO NOT EDIT)
 #define TIMER2_USED 3
 #define WDT_USED 4
 
-#define ITERATIONS_TO_LONG_PRESS_TRIGGER LONG_PRESS_DELAY / TACT_TIMER_PERIOD //calculates how many ISR fires needed for long press
-#define MAXIMUM (DEBOUNCE_TIME * SAMPLE_FREQUENCY)                            //debounce algorith max samples
+
 
 // End of File
 #endif

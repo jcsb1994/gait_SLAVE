@@ -4,7 +4,7 @@
 #include "main.h"
 
 
-void input_shift_reg_SPI_setup();
+//void input_shift_reg_SPI_setup();
 
 /***************************************************************************
  * inputShiftSnapShot function
@@ -16,9 +16,9 @@ void input_shift_reg_SPI_setup();
  * 
  ***************************************************************************/
 
-void shift_reg_snapshot();
+//void shift_reg_snapshot();
 
-int transfer_shift_reg_data();
+//int transfer_shift_reg_data();
 
 
 
