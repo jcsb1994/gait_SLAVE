@@ -1,5 +1,7 @@
 #include "tact.h"
 
+#if BUTTONS_CONFIG
+
 // Initialization of static variables
 int tact::mCount = 0;
 int *tact::pressOutput = 0;
@@ -233,4 +235,6 @@ void tact::timerCount()
     if (tact_is_pressed && !long_effect_done)
         long_press_counter++;
 }
-#endif
+#endif //LONG_BUTTON_PRESS_CONFIG
+
+#endif  //bUTTONS_CONFIG

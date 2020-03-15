@@ -10,7 +10,7 @@ FSM myFSM;
 
 void FSM::init()
 {
-    myFSM.setState(INIT_stateHandler);
+    myFSM.setState(TOF_stateHandler);
 }
 
 /*####################################################################################################
@@ -54,49 +54,25 @@ void WAIT_FOR_RFID_stateHandler()
 
 void TOF_stateHandler()
 {
-    mySensor.debounce();    // Read TOF sensor
-    finalSensor.debounce(); // Read 2nd
+    mySlaveSensor.debounce();    // Read TOF sensor
 
-    // If starting time isnt defined and 1 of the sensors are blocked
-    if (!gait_assessment.hasBegun() && (mySensor.getStatus() || finalSensor.getStatus()))
+    //if status is blocked, we measure time and send it to Master. it will figure out what to do with it.
+    if(mySlaveSensor.getStatus())
     {
-        (mySensor.getStatus()) ? (mySensor.flag++) : (finalSensor.flag++);
-        gait_assessment.setStartTime();
-        myFSM.setEvent(events::speed_measured);
+        if(!mySlaveSensor.flag){
+            mySlaveSensor.flag++;
+            myFSM.setEvent(events::TOF_blocked);
+        }
     }
-
-    // If start time was recorded, and reading the opposite
-    else if (gait_assessment.hasBegun() && ((mySensor.getStatus() && finalSensor.flag) || (finalSensor.getStatus() && mySensor.flag)))
-    {
-        gait_assessment.computeSpeed();
-        myFSM.setEvent(speed_measured);
-        mySensor.flag++;
-        finalSensor.flag++;
-    }
-
-    else if (mySensor.flag && finalSensor.flag && !mySensor.getStatus() && !finalSensor.getStatus())
-    {
-        mySensor.flag = 0;
-        finalSensor.flag = 0;
-        gait_assessment.reset();
-    }
+    else if(!mySlaveSensor.getStatus() && mySlaveSensor.flag) mySlaveSensor.flag = 0;
 
     switch (myFSM.getEvent())
     {
-    case events::back:
-
-        mySensor.flag = 0;
-        finalSensor.flag = 0;
-        gait_assessment.reset();
-        myFSM.setState(INIT_stateHandler);
-        break;
-
-    case events::select:
-        finalSensor.flag = 0;
-        mySensor.flag = 0;
-        gait_assessment.reset();
-        //Serial.println("reseted!");
-        break;
+    case events::TOF_blocked:
+    send_byte_BT(TIME_MEASURED_MESSAGE);
+    Serial.println("sent");
+    
+    break;
 
     case events::speed_measured:
         break;

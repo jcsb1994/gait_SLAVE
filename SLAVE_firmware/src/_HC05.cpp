@@ -30,7 +30,7 @@ void read_BT_events()
       Serial.println ("ye");
       break;
 
-    case START_TIME_MEASURED_MESSAGE:
+    case TIME_MEASURED_MESSAGE:
       //record time NOW
       break;
 

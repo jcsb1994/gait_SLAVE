@@ -33,6 +33,7 @@ enum events
     select = 1,
     increment,
     decrement = 3,
+    TOF_blocked,
     
     RFID_detected,
     back,

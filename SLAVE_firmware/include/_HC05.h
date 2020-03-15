@@ -6,11 +6,12 @@ extern SoftwareSerial BTserial; // SRX | STX
 
 #include "main.h"
 
+// Bluetooth messages
+#define ENTER_MEASURING_MODE_MESSAGE 'a' // 97 // Request to turn On RFID
+#define RFID_RECOGNIZED_MESSAGE      'b'    // Request to turn on VL53
 
-#define ENTER_MEASURING_MODE_MESSAGE 'a' // 97
-#define RFID_RECOGNIZED_MESSAGE 98
-#define START_TIME_MEASURED_MESSAGE 99 
-#define TEST_RESULT_MILLISEC_MESSAGE 100
+#define TIME_MEASURED_MESSAGE         'c'    // Slave sends signal to save time to Master. must be followed by a RF ID
+#define TEST_RESULT_MILLISEC_MESSAGE 'd'    
 
 void testBT();
 

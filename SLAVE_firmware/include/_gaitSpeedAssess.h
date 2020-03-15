@@ -16,6 +16,7 @@ private:
     unsigned long mStartTime;
     bool mCalculatedFlag;
     unsigned long mLastSpeed;
+    bool mStartTimeAlreadyCalculated;   // Flagged up when BT message received
 
 public:
     int exactDistance = 500; // Takes values from 3 to 5 meters: 300 to 500 in cm
@@ -25,6 +26,9 @@ public:
     {
         return mTestType;
     }
+
+    // Setup functions
+
     void setTestTypeUp()
     {
         //mTestType = 5;
@@ -38,6 +42,15 @@ public:
             mTestType--;
         //Serial.println(mTestType);
     }
+
+    // BT related functions
+
+    bool is_start_time_master() {
+        return mStartTimeAlreadyCalculated;
+    }
+
+    // Measurement functions
+
     void setStartTime()
     {
         mStartTime = millis();
