@@ -7,20 +7,34 @@
 class TOF
 {
 private:
+  VL53L1X *linked_sensor;
+
   int currentReading;
   int lastReading;
   bool maybeFlag;
   int integrator;
   bool tof_status;
-  VL53L1X *linked_sensor;
+
+  //bool calibrationFlag;
+  int minimumClearValue;
 
 public:
-  TOF(VL53L1X &sensor_to_link):
-    linked_sensor(&sensor_to_link)
-  {}
+  TOF(VL53L1X &sensor_to_link) : linked_sensor(&sensor_to_link)
+  {
+  }
+
+  bool calibrate(); // calibrates with current wall distance before entering measurement mode
+  //bool isCalibrationDone;
+
+ /* bool isCalibrated()
+  {
+    return calibrationFlag;
+  }*/
+
   void debounce();
   void init();
-  bool getStatus() {
+  bool getStatus()
+  {
     return tof_status;
   }
   bool flag;

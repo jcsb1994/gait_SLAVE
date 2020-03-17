@@ -27,19 +27,19 @@ void read_BT_events()
     switch (receivedByte)
     {
       case ENTER_MEASURING_MODE_MESSAGE:
-      Serial.println ("ye");
+      //Serial.println ("ye");
       break;
 
-    case TIME_MEASURED_MESSAGE:
-      //record time NOW
+    case STOP_MEASURING_MESSAGE:
+      myFSM.setEvent(events::stop_measuring_request);
       break;
 
     case RFID_RECOGNIZED_MESSAGE:
       myFSM.setEvent(events::RFID_detected);
       break;
 
-    case TEST_RESULT_MILLISEC_MESSAGE:
-
+    case ENTER_CALIB_MESSAGE:
+    myFSM.setEvent(events::calib_request);
       break;
 
     default:

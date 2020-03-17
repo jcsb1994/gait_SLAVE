@@ -33,8 +33,12 @@ enum events
     select = 1,
     increment,
     decrement = 3,
+
     TOF_blocked,
-    
+    calib_request,
+    stop_measuring_request,
+   // calib_success,
+
     RFID_detected,
     back,
     speed_measured, //maybe?
@@ -48,6 +52,8 @@ enum events
 void INIT_stateHandler();
 
 void SETUP_stateHandler();
+
+void TOF_CALIB_stateHandler();
 
 void BT_PAIR_stateHandler();
 

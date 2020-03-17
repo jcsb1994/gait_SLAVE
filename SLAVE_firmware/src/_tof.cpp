@@ -8,6 +8,49 @@
 
 // TOF class to give proper measurement methods to each VL53L1X
 
+
+#define CALIB_READINGS 10
+#define MAX_CALIB_ATTEMPTS 5
+bool TOF::calibrate()
+{
+  //calibrationFlag = 0; //reset last calibration results
+
+  int curr;
+  int max = linked_sensor->read();  // Max to make sure the minimum clear value is not due to someone blocking during calib
+  uint8_t nAttempts;
+  do
+  {
+    // Serial.println("trying calib");
+    nAttempts++;
+
+    for (int i = 0; i < CALIB_READINGS; i++)
+    {
+      curr = linked_sensor->read();
+      minimumClearValue = curr;
+      max = curr;
+
+      if (curr < minimumClearValue)
+        minimumClearValue = curr;
+      if (curr > max)
+        max = curr;
+      delay(100);
+    }
+
+  } while ((max - minimumClearValue) > 800 && nAttempts < MAX_CALIB_ATTEMPTS); // Do again if more than 800 difference between calib readings
+  // Serial.println("calib done");
+
+  if (nAttempts < MAX_CALIB_ATTEMPTS)
+    //calibrationFlag = 1; // Succesful calib
+    return 1;
+  else
+  {
+    //calibrationFlag = 0;
+    return 0;
+  }
+
+}
+
+
 void TOF::debounce()
 {
   currentReading = linked_sensor->read(); //get the newest reading
