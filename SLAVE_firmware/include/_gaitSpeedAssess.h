@@ -16,11 +16,13 @@ private:
     unsigned long mStartTime;
     bool mCalculatedFlag;
     unsigned long mLastSpeed;
-    bool mStartTimeAlreadyCalculated;   // Flagged up when BT message received
+    bool mStartTimeAlreadyCalculated; // Flagged up when BT message received
+                 // Flags when we are in continuous mode, not caring about RFID reading and staying in ToF mode
 
 public:
     int exactDistance = 500; // Takes values from 3 to 5 meters: 300 to 500 in cm
-
+        bool continuous; 
+        
     gaitSpeedAssess() {} //ctor
     uint8_t getTestType()
     {
@@ -45,7 +47,8 @@ public:
 
     // BT related functions
 
-    bool is_start_time_master() {
+    bool is_start_time_master()
+    {
         return mStartTimeAlreadyCalculated;
     }
 

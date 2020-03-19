@@ -37,6 +37,7 @@ enum events
     TOF_blocked,
     calib_request,
     stop_measuring_request,
+    continuous_request,
    // calib_success,
 
     RFID_detected,

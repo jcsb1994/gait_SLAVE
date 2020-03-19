@@ -14,6 +14,7 @@ extern SoftwareSerial BTserial; // SRX | STX
 #define CALIB_SUCCESSFUL_MESSAGE 'f'
 #define TIME_MEASURED_MESSAGE         'c'    // Slave sends signal to save time to Master. must be followed by a RF ID
 #define TEST_RESULT_MILLISEC_MESSAGE 'd'    
+#define CONTINUOUS_MODE_MESSAGE 'h'
 
 void testBT();
 

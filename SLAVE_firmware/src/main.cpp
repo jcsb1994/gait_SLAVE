@@ -21,7 +21,7 @@ void setup()
 {
   Serial.begin(9600); //Serial.begin(38400); // Speed to comm with HC05
   BTserial.begin(9600);
-  Serial.println("fuck you");
+  //Serial.println("fuck you");
 
   //pinMode(ledPin, OUTPUT);
   //pinMode(LedPin2, OUTPUT);

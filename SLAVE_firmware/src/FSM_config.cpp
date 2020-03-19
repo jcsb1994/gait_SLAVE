@@ -33,20 +33,21 @@ void INIT_stateHandler()
 
 void TOF_CALIB_stateHandler()
 {
-    if(mySlaveSensor.calibrate())
+    if (mySlaveSensor.calibrate())
     {
-        myFSM.setState(TOF_stateHandler);
+        myFSM.setState(WAIT_FOR_RFID_stateHandler);
         send_byte_BT(CALIB_SUCCESSFUL_MESSAGE);
     }
     else
     {
         myFSM.setState(INIT_stateHandler);
     }
-    
 }
 
 void WAIT_FOR_RFID_stateHandler()
 {
+        myRFID.scanUIDs();
+
     switch (myFSM.getEvent())
     {
     case events::back:
@@ -63,6 +64,11 @@ void WAIT_FOR_RFID_stateHandler()
         myFSM.setEvent(events::RFID_detected);
         break;
 
+        case events::continuous_request: // Receiving message to go into continuous mode
+        myFSM.setState(TOF_stateHandler);
+        gait_assessment.continuous++;
+        break;
+
     default:
         break;
     }
@@ -70,6 +76,9 @@ void WAIT_FOR_RFID_stateHandler()
 
 void TOF_stateHandler()
 {
+    if (!gait_assessment.continuous)
+        myRFID.scanUIDs();
+
     mySlaveSensor.debounce(); // Read TOF sensor
 
     //if status is blocked, we measure time and send it to Master. it will figure out what to do with it.
@@ -96,8 +105,15 @@ void TOF_stateHandler()
         break;
 
     case events::stop_measuring_request:
-    myFSM.setState(INIT_stateHandler);
-    break;
+        myFSM.setState(INIT_stateHandler);
+        break;
+
+    case events::RFID_left:
+        myFSM.setState(WAIT_FOR_RFID_stateHandler);
+        //myMenu.setCurrentPage(print_wait_for_rfid_page);
+        //print_wait_for_rfid_page();
+        //Serial.println("left");
+        break;
 
     default:
         break;

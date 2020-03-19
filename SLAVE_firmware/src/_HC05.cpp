@@ -1,6 +1,6 @@
 #include "_HC05.h"
 
-SoftwareSerial BTserial(9, 10);
+SoftwareSerial BTserial(5, 6);
 
 void testBT()
 {
@@ -41,6 +41,10 @@ void read_BT_events()
     case ENTER_CALIB_MESSAGE:
     myFSM.setEvent(events::calib_request);
       break;
+
+    case CONTINUOUS_MODE_MESSAGE:
+    myFSM.setEvent(events::continuous_request);
+    break;
 
     default:
       break;
