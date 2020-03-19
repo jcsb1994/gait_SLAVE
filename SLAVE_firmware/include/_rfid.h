@@ -1,18 +1,7 @@
 #ifndef RFID_H
 #define RFID_H
 
-#include <MFRC522.h>
 #include "main.h"
-
-/*
- * 
- * All the resources for this project: https://randomnerdtutorials.com/
- * Modified by Rui Santos
- * 
- * Created by FILIPEFLOP
- * 
- */
-
 #include <SPI.h>
 #include <MFRC522.h>
 
@@ -22,7 +11,7 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 uint8_t activeID[4];
 
-void setup()
+void RFID_setup()
 {
     SPI.begin();        // Initiate  SPI bus
     mfrc522.PCD_Init(); // Initiate MFRC522
